@@ -40,7 +40,6 @@ interpolate() {
     local result=0
     local adjusted_progress
 
-
     if (( $(echo "$progress < 0.5" | bc -l) )); then
         adjusted_progress=$(echo "2 * $progress" | bc -l)
         result=$(awk "BEGIN {print $start+($mid-$start)*$adjusted_progress}")
@@ -58,7 +57,6 @@ turn_lamps_on() {
         COMMAND="[{\"attributes\":{\"isOn\":true}}]"
         curl -X PATCH "https://$DIRIGERA:8443/v1/devices/${lamp}" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "$COMMAND" --insecure
     done
-
 }
 
 turn_lamps_off() {
@@ -67,7 +65,6 @@ turn_lamps_off() {
         COMMAND="[{\"attributes\":{\"isOn\":false}}]"
         curl -X PATCH "https://$DIRIGERA:8443/v1/devices/${lamp}" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "$COMMAND" --insecure
     done
-
 }
 
 setLightState() {
@@ -98,7 +95,6 @@ setLightState() {
         COMMAND=$(printf "[{\"attributes\":{\"colorHue\":%.15g,\"colorSaturation\":%.15g}}]" "$h" "$s")
         curl -X PATCH "https://$DIRIGERA:8443/v1/devices/${lamp}" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d "$COMMAND" --insecure
     done
-
 }
 
 
@@ -131,8 +127,8 @@ perform_sunrise_simulation() {
     done
 }
 
-# BUG: This does not work; the bulb will not process commands while they're
-# soft-off (i.e. powered but turned off by software).
+# BUG: This does not work; the bulb will not process commands while soft-off
+# (i.e. powered but turned off by software).
 #
 # Set the lights to the initial HSL values so they don't turn on to bright
 # white at max brightness, or whatever they were last set to.
