@@ -9,7 +9,7 @@ TOKEN="CHANGEME"
 # Hostname or IP of the gateway
 DIRIGERA="CHANGEME"
 # Array of lightbulb IDs
-LAMPS=("CHANGEME") # Separate multiple IDs with commas
+LAMPS=("CHANGEME") # Separate multiple IDs with spaces
 
 ####################################
 # SUNRISE SIMULATION CONFIGURATION #
